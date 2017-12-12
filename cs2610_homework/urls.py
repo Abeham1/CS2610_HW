@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework.urlpatterns import format_suffix_patterns
+from unit_converter import views
+from gold import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^conversions/', views.ConversionList.as_view()),
+    url(r'^gold/', include('gold.urls')),
 ]

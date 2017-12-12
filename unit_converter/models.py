@@ -4,10 +4,13 @@ from django.db import models
 
 # Create your models here.
 class Conversion(models.Model):
-    name = models.CharField(max_length=20)
-    rate = models.FloatField()
+    value = models.FloatField()
+    unit1 = models.CharField(max_length=20)
+    unit2 = models.CharField(max_length=20)
     
     def __str__(self):
-        return self.name
+        return self.unit1 + " to " + self.unit2
         
         
+        
+#API key: jNwh_nS1XpvJfiJZFaFV

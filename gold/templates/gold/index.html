@@ -1,0 +1,56 @@
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Worth your weight in GOLD!</title>
+		<link href="{% static 'gold/style.css' %}" rel="stylesheet">
+	</head>
+
+	<body>
+        <div>
+            <div >
+				<h2>How much would you be worth after fist-bumping King Midas?</h2>
+                <input type="number" id="weight" name="weight">
+                <button type="button" onclick="calculate()">Find out!</button>
+				<p id="result"></p>
+            </div>
+        </div>
+
+		<script type="text/javascript">
+var calculate = function() {
+    var priceOfGold;
+    var apiKey = 'jNwh_nS1XpvJfiJZFaFV';
+    var start = "2017-12-08";
+    var end = "2017-12-11";
+	var goldPriceReqUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=' + apiKey + '&column_index=2&start_date=' + start + '&end_date=' + end;
+	var goldReq = new XMLHttpRequest();
+	goldReq.open('GET', goldPriceReqUrl);
+	goldReq.responseType = 'json';
+	goldReq.send();
+	goldReq.onload = function() {
+		var json = goldReq.response;
+		console.log(json);
+		priceOfGold = json.dataset[0][1];
+	}
+	var value;
+	var troyWeight;
+	var weight = document.querySelector("#weight").value;
+	var troyWeightReqUrl = 'https://cs2610-homework-abeham1.c9users.io/conversions/';
+	var troyReq = new XMLHttpRequest();
+	troyReq.open('GET', troyWeightReqUrl);
+	troyReq.responseType = 'json';
+	troyReq.send();
+	troyReq.onload = function() {
+	    var json = troyReq.response;
+	    console.log(json);
+	    troyWeight = json.dataset['value'] * weight;
+	}
+	value = troyWeight * priceOfGold;
+	document.querySelector('#result').textContent = value;
+}
+		</script>
+	</body>
+</html>
+
+<!-- document.querySelector('#result').textContent = json['fibonacci'] -->
