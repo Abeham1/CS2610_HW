@@ -44,7 +44,7 @@ var calculate = function() {
 	troyReq.onload = function() {
 	    var json = troyReq.response;
 	    console.log(json);
-	    troyWeight = json.dataset['value'] * weight;
+	    troyWeight = json.dataset[1]['value'] * weight;
 	}
 	value = troyWeight * priceOfGold;
 	document.querySelector('#result').textContent = value;
