@@ -13,13 +13,15 @@
 				<h2>How much would you be worth after fist-bumping King Midas?</h2>
                 <input type="number" id="weight" name="weight">
                 <button type="button" onclick="calculate()">Find out!</button>
+                <p id="one"></p>
+                <p id="two"></p>
 				<p id="result"></p>
             </div>
         </div>
 
 		<script type="text/javascript">
 var calculate = function() {
-    var priceOfGold;
+    var priceOfGold = 1254.58;
     var apiKey = 'jNwh_nS1XpvJfiJZFaFV';
     var start = "2017-12-08";
     var end = "2017-12-11";
@@ -34,7 +36,7 @@ var calculate = function() {
 		priceOfGold = json.dataset[0][1];
 	}
 	var value;
-	var troyWeight;
+	var troyWeight = 14.5833;
 	var weight = document.querySelector("#weight").value;
 	var troyWeightReqUrl = 'https://cs2610-homework-abeham1.c9users.io/conversions/';
 	var troyReq = new XMLHttpRequest();
@@ -44,10 +46,13 @@ var calculate = function() {
 	troyReq.onload = function() {
 	    var json = troyReq.response;
 	    console.log(json);
-	    troyWeight = json.dataset[1]['value'] * weight;
+	    troyWeight = json.dataset[1]['value']; //
 	}
+	troyWeight = troyWeight * weight;
+	document.querySelector('#one').textContent = "Weight = " + weight;
+	document.querySelector('#two').textContent = "Troy weight = " + troyWeight;
 	value = troyWeight * priceOfGold;
-	document.querySelector('#result').textContent = value;
+	document.querySelector('#result').textContent = "You are worth: $" + value;
 }
 		</script>
 	</body>
